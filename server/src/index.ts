@@ -7,6 +7,7 @@ import audioRouter from "./routers/audio";
 import favoriteRouter from "./routers/favorite";
 import playlistRouter from "./routers/playlist";
 import profileRouter from "./routers/profile";
+import historyRouter from "./routers/history";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/audio", audioRouter);
 app.use("/favorite", favoriteRouter);
 app.use("/playlist", playlistRouter);
 app.use("/profile", profileRouter);
+app.use("/history", historyRouter);
 
 app.listen(PORT, () => {
   console.log("Port is listening on port " + PORT);

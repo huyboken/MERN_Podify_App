@@ -73,6 +73,9 @@ export const sendReVerifyEmail: RequestHandler = async (req, res) => {
 
   if (!user) return res.status(403).json({ error: "Invalid request!" });
 
+  if (user.verified)
+    return res.status(422).json({ error: "Your account is already verified!" });
+
   await EmailVerificationToken.findOneAndDelete({ owner: userId });
 
   const token = generateToken();

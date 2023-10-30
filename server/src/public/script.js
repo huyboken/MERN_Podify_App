@@ -83,7 +83,7 @@ const handleSubmit = async (evt) => {
     },
     body: JSON.stringify({ token, userId, password: password.value }),
   });
-  console.log("first", res);
+
   button.disable = false;
   button.innerText = "Reset Password";
 

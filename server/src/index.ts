@@ -28,6 +28,6 @@ app.use("/history", historyRouter);
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT || 8000, () => {
   console.log("Port is listening on port " + PORT);
 });

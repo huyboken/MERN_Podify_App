@@ -1,14 +1,16 @@
-import {NavigationContainer} from '@react-navigation/native';
-import AuthNavigator from '@src/navigation/AuthNavigator';
+import AppContainer from '@components/AppContainer';
+import AppNavigator from '@src/navigation';
+import store from '@src/store';
 import React, {FC} from 'react';
+import {Provider} from 'react-redux';
 
-interface Props {}
-
-const App: FC<Props> = props => {
+const App = () => {
   return (
-    <NavigationContainer>
-      <AuthNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <AppContainer>
+        <AppNavigator />
+      </AppContainer>
+    </Provider>
   );
 };
 

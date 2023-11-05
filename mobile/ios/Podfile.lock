@@ -370,6 +370,8 @@ PODS:
     - React-jsi (= 0.70.10)
     - React-logger (= 0.70.10)
     - React-perflogger (= 0.70.10)
+  - RNCAsyncStorage (1.19.4):
+    - React-Core
   - RNReanimated (3.5.4):
     - DoubleConversion
     - FBLazyVector
@@ -469,6 +471,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -561,6 +564,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -618,6 +623,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 0b23ba09f2f6671a1ddee3c37d27b772b9448346
   React-runtimeexecutor: 77aa3714a353cfb1a5f5e315e8af5154cd3d9402
   ReactCommon: a29dac86d7219579db079cef8f380ebffe1ba545
+  RNCAsyncStorage: 3a8f7145d17cdd9f88e7b77666c94a09e4f759c8
   RNReanimated: 12a905af0de1a7f728eacebc5a6af1cc5ada64ad
   RNScreens: 2b19e2471db8a581c83f381f4ea5d43071c9a3bf
   RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8

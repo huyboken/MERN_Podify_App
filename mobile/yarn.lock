@@ -6690,7 +6690,7 @@
     "jscodeshift" "^0.14.0"
     "nullthrows" "^1.1.1"
 
-"react-native-document-picker@^9.0.1":
+"react-native-document-picker@9.0.1":
   "integrity" "sha512-l2c2xChwsdjzZIV9QJc85buC3vXkM5ZuY4943yMDj3TiszJp1spmHNaRMZKYIh3yVwdD2jENm0DBU5AWa+jhLg=="
   "resolved" "https://registry.npmjs.org/react-native-document-picker/-/react-native-document-picker-9.0.1.tgz"
   "version" "9.0.1"

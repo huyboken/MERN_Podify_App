@@ -1,6 +1,8 @@
 import CategorySelector from '@components/CategorySelector';
 import FileSelector from '@components/FileSelector';
+import catchAsyncError from '@src/api/catchError';
 import client from '@src/api/client';
+import {updateNotification} from '@src/store/notification';
 import AppButton from '@ui/AppButton';
 import Progess from '@ui/Progess';
 import {Keys, getFromAsyncStorage} from '@utils/asyncStorage';
@@ -18,6 +20,7 @@ import {
 } from 'react-native';
 import {DocumentPickerResponse, types} from 'react-native-document-picker';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch} from 'react-redux';
 import * as yup from 'yup';
 
 interface FormFields {
@@ -57,6 +60,8 @@ const audioInfoSchema = yup.object().shape({
 interface Props {}
 
 const Upload: FC<Props> = props => {
+  const dispatch = useDispatch();
+
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [audioInfo, setAudioInfo] = useState({...defaultForm});
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -111,9 +116,8 @@ const Upload: FC<Props> = props => {
       });
       console.log(data);
     } catch (error) {
-      if (error instanceof yup.ValidationError) {
-        console.log(error.message);
-      } else console.log(error?.response?.data);
+      const errorMessage = catchAsyncError(error);
+      dispatch(updateNotification({type: 'error', message: errorMessage}));
     }
     setBusy(false);
   };

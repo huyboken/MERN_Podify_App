@@ -11,6 +11,10 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthStackParamList} from '@src/@type/navigation';
 import {FormikHelpers} from 'formik';
 import client from '@src/api/client';
+import {isAxiosError} from 'axios';
+import {useDispatch} from 'react-redux';
+import {updateNotification} from '@src/store/notification';
+import catchAsyncError from '@src/api/catchError';
 
 const signupSchema = yup.object({
   name: yup
@@ -50,6 +54,8 @@ const initialValues = {
 
 const SignUp: FC<Props> = props => {
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
+  const dispatch = useDispatch();
+
   const [secureEntry, setSecureEntry] = useState(true);
 
   const tooglePasswordView = () => setSecureEntry(!secureEntry);
@@ -65,7 +71,8 @@ const SignUp: FC<Props> = props => {
       });
       navigation.navigate('Verification', {userInfo: data.user});
     } catch (error) {
-      console.log('Sign in error: ', JSON.stringify(error));
+      const errorMessage = catchAsyncError(error);
+      dispatch(updateNotification({type: 'error', message: errorMessage}));
     }
     action.setSubmitting(false);
   };

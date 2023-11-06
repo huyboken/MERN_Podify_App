@@ -9,12 +9,16 @@ import {AuthStackParamList} from '@src/@type/navigation';
 import client from '@src/api/client';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import colors from '@utils/colors';
+import catchAsyncError from '@src/api/catchError';
+import {updateNotification} from '@src/store/notification';
+import {useDispatch} from 'react-redux';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Verification'>;
 
 const otpFields = new Array(6).fill('');
 
 const Verification: FC<Props> = ({route}) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation<NavigationProp<AuthStackParamList>>();
   const [otp, setOtp] = useState([...otpFields]);
   const [activeOtpIndex, setActiveOtpIndex] = useState(0);
@@ -51,13 +55,17 @@ const Verification: FC<Props> = ({route}) => {
   const isValidOtp = otp.every(value => value.trim());
 
   const handleSubmit = async () => {
-    if (!isValidOtp) return;
+    if (!isValidOtp)
+      return dispatch(
+        updateNotification({type: 'error', message: 'Invalid OTP!'}),
+      );
     setSubmiting(true);
     try {
       const {data} = await client.post('/auth/verify-email', {
         userId: userInfo.id,
         token: otp.join(''),
       });
+      dispatch(updateNotification({type: 'success', message: data.message}));
       //Navigation back to sign in
       navigation.navigate('SignIn');
     } catch (error) {
@@ -72,7 +80,8 @@ const Verification: FC<Props> = ({route}) => {
     try {
       await client.post('/auth/re-verify-email', {userId: userInfo.id});
     } catch (error) {
-      console.log('Requesting for new otp: ', error);
+      const errorMessage = catchAsyncError(error);
+      dispatch(updateNotification({type: 'error', message: errorMessage}));
     }
   };
 

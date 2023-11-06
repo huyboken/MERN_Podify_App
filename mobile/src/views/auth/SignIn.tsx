@@ -14,6 +14,8 @@ import client from '@src/api/client';
 import {updateLogginState, updateProfile} from '@src/store/auth';
 import {useDispatch} from 'react-redux';
 import {Keys, saveToAsyncStorage} from '@utils/asyncStorage';
+import catchAsyncError from '@src/api/catchError';
+import {updateNotification} from '@src/store/notification';
 
 const signinSchema = yup.object({
   email: yup
@@ -61,7 +63,8 @@ const SignIn: FC<Props> = props => {
       dispatch(updateProfile(data.profile));
       dispatch(updateLogginState(true));
     } catch (error) {
-      console.log('Sign in error: ', JSON.stringify(error));
+      const errorMessage = catchAsyncError(error);
+      dispatch(updateNotification({type: 'error', message: errorMessage}));
     }
     action.setSubmitting(false);
   };

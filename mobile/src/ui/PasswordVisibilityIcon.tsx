@@ -1,6 +1,5 @@
 import colors from '@utils/colors';
 import React, {FC} from 'react';
-import {StyleSheet, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 interface Props {
@@ -18,7 +17,3 @@ const PasswordVisibilityIcon: FC<Props> = ({privateIcon}) => {
 };
 
 export default PasswordVisibilityIcon;
-
-const styles = StyleSheet.create({
-  container: {},
-});

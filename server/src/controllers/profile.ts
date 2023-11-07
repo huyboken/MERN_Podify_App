@@ -213,6 +213,7 @@ export const getRecommendByProfile: RequestHandler = async (req, res) => {
         about: "$about",
         category: "$category",
         file: "$file.url",
+        poster: "$poster.url",
         owner: {
           id: "$owner._id",
           name: "$owner.name",

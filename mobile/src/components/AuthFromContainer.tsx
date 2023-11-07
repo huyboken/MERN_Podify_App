@@ -1,7 +1,7 @@
 import CircleUi from '@ui/CircleUi';
 import colors from '@utils/colors';
 import React, {FC, ReactNode} from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 
 interface Props {
   heading?: string;

@@ -1,6 +1,6 @@
 import AuthInputField from '@components/form/AuthInputField';
 import Form from '@components/form';
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {StyleSheet, View} from 'react-native';
 import * as yup from 'yup';
 import SubmitBtn from '@components/form/SubmitBtn';

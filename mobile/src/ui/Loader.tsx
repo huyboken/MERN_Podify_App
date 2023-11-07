@@ -1,6 +1,5 @@
 import colors from '@utils/colors';
 import React, {FC, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

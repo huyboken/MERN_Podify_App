@@ -1,5 +1,5 @@
 import React, {FC, ReactNode} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import AppNotification from './AppNotification';
 
 interface Props {

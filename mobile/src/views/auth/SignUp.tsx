@@ -11,7 +11,6 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthStackParamList} from '@src/@type/navigation';
 import {FormikHelpers} from 'formik';
 import client from '@src/api/client';
-import {isAxiosError} from 'axios';
 import {useDispatch} from 'react-redux';
 import {updateNotification} from '@src/store/notification';
 import catchAsyncError from '@src/api/catchError';

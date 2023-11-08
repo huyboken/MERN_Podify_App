@@ -1,5 +1,5 @@
 import {AudioData} from '@src/@type/audio';
-import {fetchRecommendedAudios} from '@src/hooks/query';
+import {useFetchRecommendedAudios} from '@src/hooks/query';
 import GridView from '@ui/GridView';
 import PulseAnimationContainer from '@ui/PulseAnimationContainer';
 import colors from '@utils/colors';
@@ -13,7 +13,7 @@ interface Props {
 const dumnyData = new Array(10).fill('');
 
 const RecommendedAudios: FC<Props> = ({onAudioPress, onAudioLongPress}) => {
-  const {data = [], isLoading} = fetchRecommendedAudios();
+  const {data = [], isLoading} = useFetchRecommendedAudios();
 
   const getPoster = (poster?: string) => {
     return poster ? {uri: poster} : require('../assets/music.png');

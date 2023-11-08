@@ -5,7 +5,7 @@ import {Modal, Pressable, StyleSheet, View} from 'react-native';
 interface Props {
   visible?: boolean;
   onRequestClose?(): void;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const BasicModalContainer: FC<Props> = ({

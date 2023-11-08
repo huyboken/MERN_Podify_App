@@ -91,7 +91,7 @@ export const sendReVerifyEmail: RequestHandler = async (req, res) => {
     userId: user?._id.toString(),
   });
 
-  res.status(200).json({ message: "Please check your mail." });
+  res.json({ message: "Please check your mail." });
 };
 
 export const generateForgetPasswordLink: RequestHandler = async (req, res) => {

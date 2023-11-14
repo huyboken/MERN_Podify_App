@@ -10,3 +10,9 @@ export type AuthStackParamList = {
   LostPassword: undefined;
   Verification: {userInfo: NewUserResponse};
 };
+
+export type ProfileNavigatorParamsList = {
+  Profile: undefined;
+  ProfileSettings: undefined;
+  Verification: {userInfo: NewUserResponse};
+};

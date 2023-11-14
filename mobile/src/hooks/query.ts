@@ -58,3 +58,39 @@ export const useFetchPlaylist = () => {
     },
   });
 };
+
+const fetchUploadsByProfile = async (): Promise<AudioData[]> => {
+  const client = await getClient();
+  const {data} = await client('/profile/uploads');
+  return data.audios;
+};
+
+export const useFetchUploadsByProfile = () => {
+  const dispatch = useDispatch();
+
+  return useQuery(['upload-by-profile'], {
+    queryFn: () => fetchUploadsByProfile(),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+  });
+};
+
+const fetchFavorite = async (): Promise<AudioData[]> => {
+  const client = await getClient();
+  const {data} = await client('/favorite');
+  return data.audios;
+};
+
+export const useFetchFavorite = () => {
+  const dispatch = useDispatch();
+
+  return useQuery(['favorite'], {
+    queryFn: () => fetchFavorite(),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+  });
+};

@@ -51,7 +51,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
+	<key>NSCameraUsageDescription</key>
+	<string>To allow our user to select their profile picture</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To allow our user to select their profile picture</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

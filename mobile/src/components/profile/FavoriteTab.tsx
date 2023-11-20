@@ -1,4 +1,4 @@
-import {useFetchFavorite} from '@src/hooks/query';
+import {useFetchFavorite} from 'src/hooks/query';
 import AudioListItem from '@ui/AudioListItem';
 import AudioListLoadingUI from '@ui/AudioListLoadingUI';
 import EmptyRecords from '@ui/EmptyRecords';

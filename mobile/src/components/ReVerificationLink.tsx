@@ -1,9 +1,9 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {ProfileNavigatorParamsList} from '@src/@type/navigation';
-import catchAsyncError from '@src/api/catchError';
-import {getClient} from '@src/api/client';
-import {getAuthState} from '@src/store/auth';
-import {updateNotification} from '@src/store/notification';
+import {ProfileNavigatorParamsList} from 'src/@types/navigation';
+import catchAsyncError from 'src/api/catchError';
+import {getClient} from 'src/api/client';
+import {getAuthState} from 'src/store/auth';
+import {updateNotification} from 'src/store/notification';
 import AppLink from '@ui/AppLink';
 import colors from '@utils/colors';
 import React, {FC, useEffect, useState} from 'react';

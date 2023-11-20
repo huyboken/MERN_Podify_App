@@ -11,7 +11,7 @@ module.exports = {
           '@utils': './src/utils',
           '@views': './src/views',
           '@ui': './src/ui',
-          '@src': './src',
+          src: './src',
         },
       },
     ],

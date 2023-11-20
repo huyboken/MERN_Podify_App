@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {Keyboard, StyleSheet, Text, TextInput, View} from 'react-native';
-import AppLink from '@ui/AppLink';
 import AuthFormContainer from '@components/AuthFromContainer';
 import OTPField from '@ui/OTPField';
 import AppButton from '@ui/AppButton';
@@ -8,12 +7,12 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   AuthStackParamList,
   ProfileNavigatorParamsList,
-} from '@src/@type/navigation';
-import client from '@src/api/client';
+} from 'src/@types/navigation';
+import client from 'src/api/client';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import colors from '@utils/colors';
-import catchAsyncError from '@src/api/catchError';
-import {updateNotification} from '@src/store/notification';
+import catchAsyncError from 'src/api/catchError';
+import {updateNotification} from 'src/store/notification';
 import {useDispatch} from 'react-redux';
 import ReVerificationLink from '@components/ReVerificationLink';
 

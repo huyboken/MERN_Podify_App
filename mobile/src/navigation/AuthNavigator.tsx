@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AuthStackParamList} from '@src/@type/navigation';
+import {AuthStackParamList} from 'src/@types/navigation';
 import LostPassword from '@views/auth/LostPassword';
 import SignIn from '@views/auth/SignIn';
 import SignUp from '@views/auth/SignUp';

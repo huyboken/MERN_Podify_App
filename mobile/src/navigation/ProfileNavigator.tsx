@@ -1,6 +1,6 @@
 import ProfileSettings from '@components/profile/ProfileSettings';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProfileNavigatorParamsList} from '@src/@type/navigation';
+import {ProfileNavigatorParamsList} from 'src/@types/navigation';
 import Profile from '@views/Profile';
 import Verification from '@views/auth/Verification';
 import React, {FC} from 'react';

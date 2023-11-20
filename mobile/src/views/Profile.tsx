@@ -8,7 +8,7 @@ import HistoryTab from '../components/profile/HistoryTab';
 import colors from '@utils/colors';
 import ProfileContainer from '@components/ProfileContainer';
 import {useSelector} from 'react-redux';
-import {getAuthState} from '@src/store/auth';
+import {getAuthState} from 'src/store/auth';
 
 const Tab = createMaterialTopTabNavigator();
 

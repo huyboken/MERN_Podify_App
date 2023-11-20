@@ -1,10 +1,7 @@
-import {
-  getNotificationState,
-  updateNotification,
-} from '@src/store/notification';
+import {getNotificationState, updateNotification} from 'src/store/notification';
 import colors from '@utils/colors';
 import React, {FC, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,

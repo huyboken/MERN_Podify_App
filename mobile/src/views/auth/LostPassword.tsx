@@ -7,11 +7,11 @@ import SubmitBtn from '@components/form/SubmitBtn';
 import AppLink from '@ui/AppLink';
 import AuthFormContainer from '@components/AuthFromContainer';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {AuthStackParamList} from '@src/@type/navigation';
+import {AuthStackParamList} from 'src/@types/navigation';
 import {FormikHelpers} from 'formik';
-import client from '@src/api/client';
-import catchAsyncError from '@src/api/catchError';
-import {updateNotification} from '@src/store/notification';
+import client from 'src/api/client';
+import catchAsyncError from 'src/api/catchError';
+import {updateNotification} from 'src/store/notification';
 import {useDispatch} from 'react-redux';
 
 const lostPasswordSchema = yup.object({

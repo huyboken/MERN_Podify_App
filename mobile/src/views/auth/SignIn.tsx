@@ -8,14 +8,14 @@ import PasswordVisibilityIcon from '@ui/PasswordVisibilityIcon';
 import AppLink from '@ui/AppLink';
 import AuthFormContainer from '@components/AuthFromContainer';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {AuthStackParamList} from '@src/@type/navigation';
+import {AuthStackParamList} from 'src/@types/navigation';
 import {FormikHelpers} from 'formik';
-import client from '@src/api/client';
-import {updateLogginState, updateProfile} from '@src/store/auth';
+import client from 'src/api/client';
+import {updateLogginState, updateProfile} from 'src/store/auth';
 import {useDispatch} from 'react-redux';
 import {Keys, saveToAsyncStorage} from '@utils/asyncStorage';
-import catchAsyncError from '@src/api/catchError';
-import {updateNotification} from '@src/store/notification';
+import catchAsyncError from 'src/api/catchError';
+import {updateNotification} from 'src/store/notification';
 
 const signinSchema = yup.object({
   email: yup

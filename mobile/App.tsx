@@ -1,7 +1,7 @@
 import AppContainer from '@components/AppContainer';
-import AppNavigator from '@src/navigation';
-import store from '@src/store';
-import React, {FC} from 'react';
+import AppNavigator from 'src/navigation';
+import store from 'src/store';
+import React from 'react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {Provider} from 'react-redux';
 

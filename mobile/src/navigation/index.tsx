@@ -7,10 +7,10 @@ import {
   updateBusyState,
   updateLogginState,
   updateProfile,
-} from '@src/store/auth';
+} from 'src/store/auth';
 import TabNavigator from './TabNavigator';
 import {Keys, getFromAsyncStorage} from '@utils/asyncStorage';
-import client from '@src/api/client';
+import client from 'src/api/client';
 import Loader from '@ui/Loader';
 import {View, StyleSheet} from 'react-native';
 import colors from '@utils/colors';

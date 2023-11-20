@@ -1,10 +1,13 @@
-import {AudioData} from '@src/@type/audio';
-import {useFetchRecommendedAudios} from '@src/hooks/query';
+import {AudioData} from 'src/@types/audio';
+import {useFetchRecommendedAudios} from 'src/hooks/query';
 import GridView from '@ui/GridView';
 import PulseAnimationContainer from '@ui/PulseAnimationContainer';
 import colors from '@utils/colors';
 import React, {FC} from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import AudioCard from '@ui/AudioCard';
+import {useSelector} from 'react-redux';
+import {getPlayerState} from 'src/store/player';
 
 interface Props {
   onAudioPress(item: AudioData, data: AudioData[]): void;
@@ -14,10 +17,7 @@ const dumnyData = new Array(10).fill('');
 
 const RecommendedAudios: FC<Props> = ({onAudioPress, onAudioLongPress}) => {
   const {data = [], isLoading} = useFetchRecommendedAudios();
-
-  const getPoster = (poster?: string) => {
-    return poster ? {uri: poster} : require('../assets/music.png');
-  };
+  const {onGoingAudio} = useSelector(getPlayerState);
 
   if (isLoading)
     return (
@@ -37,28 +37,23 @@ const RecommendedAudios: FC<Props> = ({onAudioPress, onAudioLongPress}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Recommended</Text>
-      <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap'}}>
-        <GridView
-          data={data || []}
-          col={3}
-          renderItem={item => {
-            return (
-              <Pressable
-                onPress={() => onAudioPress(item, data)}
-                onLongPress={() => onAudioLongPress(item, data)}>
-                <Image style={styles.poster} source={getPoster(item.poster)} />
-                <Text
-                  numberOfLines={2}
-                  ellipsizeMode="tail"
-                  style={styles.audioTitle}>
-                  {item.title}
-                </Text>
-              </Pressable>
-            );
-          }}
-        />
-      </View>
+      <Text style={styles.title}>You may like this</Text>
+      <GridView
+        data={data || []}
+        col={3}
+        renderItem={item => {
+          return (
+            <AudioCard
+              title={item.title}
+              poster={item.poster}
+              onPress={() => onAudioPress(item, data)}
+              onLongPress={() => onAudioLongPress(item, data)}
+              containerStyle={{width: '100%'}}
+              playing={onGoingAudio?.id === item.id}
+            />
+          );
+        }}
+      />
     </View>
   );
 };

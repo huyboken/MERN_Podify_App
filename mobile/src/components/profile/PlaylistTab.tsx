@@ -1,4 +1,4 @@
-import {useFetchPlaylist} from '@src/hooks/query';
+import {useFetchPlaylist} from 'src/hooks/query';
 import AudioListLoadingUI from '@ui/AudioListLoadingUI';
 import EmptyRecords from '@ui/EmptyRecords';
 import PlaylistItem from '@ui/PlaylistItem';

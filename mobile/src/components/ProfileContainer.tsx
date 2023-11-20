@@ -1,4 +1,4 @@
-import {UserProfile} from '@src/store/auth';
+import {UserProfile} from 'src/store/auth';
 import AvatarField from '@ui/AvatarField';
 import colors from '@utils/colors';
 import React, {FC} from 'react';
@@ -7,7 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {ProfileNavigatorParamsList} from '@src/@type/navigation';
+import {ProfileNavigatorParamsList} from 'src/@types/navigation';
 
 interface Props {
   profile?: UserProfile | null;

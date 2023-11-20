@@ -1,7 +1,7 @@
-import {AudioData, Playlist} from '@src/@type/audio';
-import catchAsyncError from '@src/api/catchError';
-import {getClient} from '@src/api/client';
-import {updateNotification} from '@src/store/notification';
+import {AudioData, Playlist} from 'src/@types/audio';
+import catchAsyncError from 'src/api/catchError';
+import {getClient} from 'src/api/client';
+import {updateNotification} from 'src/store/notification';
 import {useQuery} from 'react-query';
 import {useDispatch} from 'react-redux';
 

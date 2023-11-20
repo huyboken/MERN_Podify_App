@@ -1,4 +1,4 @@
-import {Playlist} from '@src/@type/audio';
+import {Playlist} from 'src/@types/audio';
 import colors from '@utils/colors';
 import React, {FC} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';

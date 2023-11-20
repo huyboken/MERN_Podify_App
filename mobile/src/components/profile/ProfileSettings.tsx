@@ -4,7 +4,6 @@ import colors from '@utils/colors';
 import React, {FC, useEffect, useState} from 'react';
 import {
   Keyboard,
-  PermissionsAndroid,
   Pressable,
   StyleSheet,
   Text,
@@ -14,17 +13,17 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import AppButton from '@ui/AppButton';
-import {getClient} from '@src/api/client';
-import catchAsyncError from '@src/api/catchError';
+import {getClient} from 'src/api/client';
+import catchAsyncError from 'src/api/catchError';
 import {useDispatch, useSelector} from 'react-redux';
-import {updateNotification} from '@src/store/notification';
+import {updateNotification} from 'src/store/notification';
 import {Keys, removeFromAsyncStorage} from '@utils/asyncStorage';
 import {
   getAuthState,
   updateBusyState,
   updateLogginState,
   updateProfile,
-} from '@src/store/auth';
+} from 'src/store/auth';
 import deepEqual from 'deep-equal';
 import ImagePicker from 'react-native-image-crop-picker';
 import {getPermissionToReadImage} from '@utils/helper';

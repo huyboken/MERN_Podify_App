@@ -1,10 +1,10 @@
 import BasicModalContainer from '@ui/BasicModalContainer';
 import colors from '@utils/colors';
 import React, {FC, ReactNode} from 'react';
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Pressable, ScrollView, StyleSheet, Text} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {Playlist} from '@src/@type/audio';
+import {Playlist} from 'src/@types/audio';
 
 interface Props {
   visible: boolean;

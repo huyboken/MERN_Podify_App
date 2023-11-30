@@ -11,6 +11,9 @@ import useAudioController from 'src/hooks/useAudioController';
 import {getPlayerState} from 'src/store/player';
 import AudioPlayer from './AudioPlayer';
 import CurrentAudioList from './CurrentAudioList';
+import {useFetchIsFavorite} from 'src/hooks/query';
+import {useMutation, useQueryClient} from 'react-query';
+import {getClient} from 'src/api/client';
 
 interface Props {}
 
@@ -19,6 +22,7 @@ export const MiniPlayerHeight = 60;
 const MiniAudioPlayer: FC<Props> = props => {
   const {onGoingAudio} = useSelector(getPlayerState);
   const {isPlaying, isBusy, tooglePlayPause} = useAudioController();
+  const {data: isFav} = useFetchIsFavorite(onGoingAudio?.id || '');
   const process = useProgress();
 
   const [playerVisibility, setPlayerVisibility] = useState(false);
@@ -34,6 +38,25 @@ const MiniAudioPlayer: FC<Props> = props => {
 
   const poster = onGoingAudio?.poster;
   const source = poster ? {uri: poster} : require('../assets/music.png');
+
+  const queryClient = useQueryClient();
+
+  const toogleIsFav = async (id: string) => {
+    if (!id) return;
+    const client = await getClient();
+    await client.post('/favorite?audioId=' + id);
+  };
+
+  const favoriteMutation = useMutation({
+    mutationFn: async id => await toogleIsFav(id),
+    onMutate: (id: string) => {
+      queryClient.setQueryData<boolean>(
+        ['favorite', onGoingAudio?.id],
+        oldData => !oldData,
+      );
+    },
+  });
+
   return (
     <>
       <View
@@ -55,8 +78,14 @@ const MiniAudioPlayer: FC<Props> = props => {
           <Text style={styles.title}>{onGoingAudio?.title}</Text>
           <Text style={styles.name}>{onGoingAudio?.owner.name}</Text>
         </Pressable>
-        <Pressable style={{paddingHorizontal: 10}}>
-          <AntDesign name="hearto" color={colors.CONTRAST} size={24} />
+        <Pressable
+          onPress={() => favoriteMutation.mutate(onGoingAudio?.id || '')}
+          style={{paddingHorizontal: 10}}>
+          <AntDesign
+            name={isFav ? 'heart' : 'hearto'}
+            color={colors.CONTRAST}
+            size={24}
+          />
         </Pressable>
         {isBusy ? (
           <Loader />

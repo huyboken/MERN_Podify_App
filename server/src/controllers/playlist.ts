@@ -141,7 +141,7 @@ export const getPlaylistByProfile: RequestHandler = async (
     return {
       id: item._id,
       title: item.title,
-      itemCounts: item.items.length,
+      itemsCount: item.items.length,
       visibility: item.visibility,
     };
   });

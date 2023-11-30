@@ -3,6 +3,7 @@ import AvatarField from '@ui/AvatarField';
 import colors from '@utils/colors';
 import React, {FC, useEffect, useState} from 'react';
 import {
+  Alert,
   Keyboard,
   Pressable,
   StyleSheet,
@@ -12,6 +13,7 @@ import {
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppButton from '@ui/AppButton';
 import {getClient} from 'src/api/client';
 import catchAsyncError from 'src/api/catchError';
@@ -28,6 +30,7 @@ import deepEqual from 'deep-equal';
 import ImagePicker from 'react-native-image-crop-picker';
 import {getPermissionToReadImage} from '@utils/helper';
 import ReVerificationLink from '@components/ReVerificationLink';
+import {useQueryClient} from 'react-query';
 
 interface Props {}
 interface ProfileInfo {
@@ -42,6 +45,7 @@ const ProfileSettings: FC<Props> = props => {
   const [busy, setBusy] = useState(false);
 
   const {profile} = useSelector(getAuthState);
+  const queryClient = useQueryClient();
 
   const isSame = deepEqual(userInfo, {
     name: profile?.name,
@@ -113,6 +117,44 @@ const ProfileSettings: FC<Props> = props => {
     }
   };
 
+  const clearHistory = async () => {
+    try {
+      const client = await getClient();
+      await client.delete('/history?all=yes');
+      dispatch(
+        updateNotification({
+          type: 'success',
+          message: 'Your histories will be removed!',
+        }),
+      );
+      queryClient.invalidateQueries({queryKey: ['histories']});
+    } catch (error) {
+      const messageError = catchAsyncError(error);
+      dispatch(updateNotification({type: 'error', message: messageError}));
+    }
+  };
+
+  const handleOnHistoryClear = () => {
+    Alert.alert(
+      'Are you sure?',
+      'This action will clear out all the history!',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Clear',
+          style: 'destructive',
+          onPress: clearHistory,
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    );
+  };
+
   useEffect(() => {
     if (profile) setUserInfo({name: profile.name, avatar: profile.avatar});
   }, [profile]);
@@ -145,17 +187,38 @@ const ProfileSettings: FC<Props> = props => {
         </View>
       </View>
       <View style={styles.titleContainer}>
+        <Text style={styles.title}>History</Text>
+      </View>
+
+      <View style={styles.settingOptionsContainer}>
+        <Pressable
+          style={styles.buttonContainer}
+          onPress={handleOnHistoryClear}>
+          <MaterialCommunityIcons
+            name="broom"
+            size={20}
+            color={colors.CONTRAST}
+          />
+          <Text style={styles.buttonTitle}>Clear All</Text>
+        </Pressable>
+      </View>
+
+      <View style={styles.titleContainer}>
         <Text style={styles.title}>Logout</Text>
       </View>
 
       <View style={styles.settingOptionsContainer}>
-        <Pressable style={styles.logoutBtn} onPress={() => handleLogout(true)}>
+        <Pressable
+          style={styles.buttonContainer}
+          onPress={() => handleLogout(true)}>
           <AntDesign name="logout" size={20} color={colors.CONTRAST} />
-          <Text style={styles.logoutBtnTitle}>Logout From All</Text>
+          <Text style={styles.buttonTitle}>Logout From All</Text>
         </Pressable>
-        <Pressable style={styles.logoutBtn} onPress={() => handleLogout()}>
+        <Pressable
+          style={styles.buttonContainer}
+          onPress={() => handleLogout()}>
           <AntDesign name="logout" size={20} color={colors.CONTRAST} />
-          <Text style={styles.logoutBtnTitle}>Logout</Text>
+          <Text style={styles.buttonTitle}>Logout</Text>
         </Pressable>
       </View>
       {!isSame && (
@@ -223,12 +286,12 @@ const styles = StyleSheet.create({
     color: colors.CONTRAST,
     marginRight: 10,
   },
-  logoutBtn: {
+  buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 15,
   },
-  logoutBtnTitle: {
+  buttonTitle: {
     color: colors.CONTRAST,
     fontSize: 18,
     marginLeft: 5,

@@ -130,7 +130,7 @@ export const getHistories: RequestHandler = async (req, res) => {
         id: "$all._id",
         audioId: "$audioInfo._id",
         date: "$all.date",
-        title: "$audioInfo._id",
+        title: "$audioInfo.title",
       },
     },
     {

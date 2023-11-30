@@ -11,12 +11,12 @@ import useAudioController from 'src/hooks/useAudioController';
 import {updateNotification} from 'src/store/notification';
 import colors from '@utils/colors';
 import React, {FC, useEffect, useState} from 'react';
-import {Pressable, ScrollView, StyleSheet, Text} from 'react-native';
-import TrackPlayer from 'react-native-track-player';
+import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useDispatch} from 'react-redux';
 import AppView from '@components/AppView';
-import AppModal from '@ui/AppModal';
+import RecentlyPlayed from '@components/RecentlyPlayed';
+import RecommendedPlaylist from '@components/RecommendedPlaylist';
 
 interface Props {}
 
@@ -95,14 +95,24 @@ const Home: FC<Props> = props => {
   return (
     <AppView>
       <ScrollView contentContainerStyle={styles.container}>
-        <LatestUploads
-          onAudioPress={onAudioPress}
-          onAudioLongPress={handleOnLongPress}
-        />
-        <RecommendedAudios
-          onAudioPress={onAudioPress}
-          onAudioLongPress={handleOnLongPress}
-        />
+        <View style={styles.space}>
+          <RecentlyPlayed />
+        </View>
+        <View style={styles.space}>
+          <LatestUploads
+            onAudioPress={onAudioPress}
+            onAudioLongPress={handleOnLongPress}
+          />
+        </View>
+        <View style={styles.space}>
+          <RecommendedAudios
+            onAudioPress={onAudioPress}
+            onAudioLongPress={handleOnLongPress}
+          />
+        </View>
+        <View style={styles.space}>
+          <RecommendedPlaylist />
+        </View>
         <OptionsModal
           visible={showOptions}
           onRequestClose={() => setShowOptions(false)}
@@ -154,6 +164,9 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+  space: {
+    marginBottom: 15,
   },
   optionContainer: {
     flexDirection: 'row',

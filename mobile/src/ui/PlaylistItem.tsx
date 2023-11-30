@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PlaylistItem: FC<Props> = ({playlist, onPress}) => {
-  const {id, itemCounts, title, visibility} = playlist;
+  const {id, itemsCount, title, visibility} = playlist;
   return (
     <Pressable onPress={onPress} style={styles.container}>
       <View style={styles.posterContainer}>
@@ -32,7 +32,7 @@ const PlaylistItem: FC<Props> = ({playlist, onPress}) => {
             size={15}
           />
           <Text style={styles.count}>
-            {itemCounts} {itemCounts > 1 ? 'audios' : 'audio'}
+            {itemsCount} {itemsCount > 1 ? 'audios' : 'audio'}
           </Text>
         </View>
       </View>

@@ -61,9 +61,7 @@ const RecommendedAudios: FC<Props> = ({onAudioPress, onAudioLongPress}) => {
 export default RecommendedAudios;
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
+  container: {},
   title: {
     color: colors.CONTRAST,
     fontSize: 20,

@@ -16,6 +16,17 @@ export interface AudioData {
 export interface Playlist {
   id: string;
   title: string;
-  itemCounts: number;
+  itemsCount: number;
   visibility: 'public' | 'private';
+}
+
+export type HistoryAudio = {
+  id: string;
+  audioId: string;
+  title: string;
+  date: string;
+};
+export interface History {
+  date: string;
+  audios: HistoryAudio[];
 }

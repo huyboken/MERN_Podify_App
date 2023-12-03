@@ -110,7 +110,7 @@ export const getPublicUploads: RequestHandler = async (req, res) => {
       title: item.title,
       about: item.about,
       file: item.file,
-      poster: item.poster,
+      poster: item.poster?.url,
       date: item.createdAt,
       owner: { id: item.owner._id, name: item.owner.name },
     };

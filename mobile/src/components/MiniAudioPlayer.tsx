@@ -14,30 +14,24 @@ import CurrentAudioList from './CurrentAudioList';
 import {useFetchIsFavorite} from 'src/hooks/query';
 import {useMutation, useQueryClient} from 'react-query';
 import {getClient} from 'src/api/client';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {HomeNavigatorParamList} from 'src/@types/navigation';
+import {getAuthState} from 'src/store/auth';
 
 interface Props {}
 
 export const MiniPlayerHeight = 60;
 
 const MiniAudioPlayer: FC<Props> = props => {
+  const {navigate} = useNavigation<NavigationProp<HomeNavigatorParamList>>();
   const {onGoingAudio} = useSelector(getPlayerState);
+  const {profile} = useSelector(getAuthState);
   const {isPlaying, isBusy, tooglePlayPause} = useAudioController();
   const {data: isFav} = useFetchIsFavorite(onGoingAudio?.id || '');
   const process = useProgress();
 
   const [playerVisibility, setPlayerVisibility] = useState(false);
   const [showCurrentLsit, setShowCurrentList] = useState(false);
-
-  const closePlayerModal = () => setPlayerVisibility(false);
-  const showPlayerModal = () => setPlayerVisibility(true);
-  const handleOnCurrentListClose = () => setShowCurrentList(false);
-  const handleOnListOptionPress = () => {
-    closePlayerModal();
-    setShowCurrentList(true);
-  };
-
-  const poster = onGoingAudio?.poster;
-  const source = poster ? {uri: poster} : require('../assets/music.png');
 
   const queryClient = useQueryClient();
 
@@ -56,6 +50,26 @@ const MiniAudioPlayer: FC<Props> = props => {
       );
     },
   });
+
+  const closePlayerModal = () => setPlayerVisibility(false);
+  const showPlayerModal = () => setPlayerVisibility(true);
+  const handleOnCurrentListClose = () => setShowCurrentList(false);
+  const handleOnListOptionPress = () => {
+    closePlayerModal();
+    setShowCurrentList(true);
+  };
+
+  const handleOnProfileLinkPress = () => {
+    closePlayerModal();
+    if (profile?.id === onGoingAudio?.owner.id) {
+      navigate('ProfileNavigator', {screens: 'Profile'});
+    } else {
+      navigate('PublicProfile', {profileId: onGoingAudio?.owner.id || ''});
+    }
+  };
+
+  const poster = onGoingAudio?.poster;
+  const source = poster ? {uri: poster} : require('../assets/music.png');
 
   return (
     <>
@@ -97,6 +111,7 @@ const MiniAudioPlayer: FC<Props> = props => {
         visible={playerVisibility}
         onRequestClose={closePlayerModal}
         onListOptionPress={handleOnListOptionPress}
+        onProfileLinkPress={handleOnProfileLinkPress}
       />
       <CurrentAudioList
         visible={showCurrentLsit}

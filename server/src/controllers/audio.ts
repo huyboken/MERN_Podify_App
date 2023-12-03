@@ -100,7 +100,7 @@ export const updateAudio: RequestHandler = async (
       gravity: "face",
     });
 
-    audio.poster = { url: posterRes.url, publicId: posterRes.public_id };
+    audio.poster = { url: posterRes.secure_url, publicId: posterRes.public_id };
     await audio.save();
   }
 

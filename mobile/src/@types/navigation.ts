@@ -1,3 +1,5 @@
+import {AudioData} from './audio';
+
 interface NewUserResponse {
   id: string;
   name: string;
@@ -11,8 +13,22 @@ export type AuthStackParamList = {
   Verification: {userInfo: NewUserResponse};
 };
 
-export type ProfileNavigatorParamsList = {
+export type ProfileNavigatorParamList = {
   Profile: undefined;
   ProfileSettings: undefined;
+  UpdateAudio: {audio: AudioData};
   Verification: {userInfo: NewUserResponse};
+};
+
+export type HomeNavigatorParamList = {
+  Home: undefined;
+  PublicProfile: {profileId: string};
+  ProfileNavigator: {
+    screens: 'Profile';
+  };
+};
+
+export type PublicProfileTabParamsList = {
+  PublicUploads: {profileId: string};
+  PublicPlaylist: {profileId: string};
 };

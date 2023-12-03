@@ -7,15 +7,14 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Octicons from 'react-native-vector-icons/Octicons';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {ProfileNavigatorParamsList} from 'src/@types/navigation';
+import {ProfileNavigatorParamList} from 'src/@types/navigation';
 
 interface Props {
   profile?: UserProfile | null;
 }
 
 const ProfileContainer: FC<Props> = ({profile}) => {
-  const navigation =
-    useNavigation<NavigationProp<ProfileNavigatorParamsList>>();
+  const navigation = useNavigation<NavigationProp<ProfileNavigatorParamList>>();
   if (!profile) return null;
   return (
     <View style={styles.container}>

@@ -6,7 +6,7 @@ import AppButton from '@ui/AppButton';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   AuthStackParamList,
-  ProfileNavigatorParamsList,
+  ProfileNavigatorParamList,
 } from 'src/@types/navigation';
 import client from 'src/api/client';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
@@ -17,7 +17,7 @@ import {useDispatch} from 'react-redux';
 import ReVerificationLink from '@components/ReVerificationLink';
 
 type Props = NativeStackScreenProps<
-  AuthStackParamList | ProfileNavigatorParamsList,
+  AuthStackParamList | ProfileNavigatorParamList,
   'Verification'
 >;
 

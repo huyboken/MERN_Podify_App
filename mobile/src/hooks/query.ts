@@ -1,9 +1,10 @@
-import {AudioData, History, Playlist} from 'src/@types/audio';
+import {AudioData, CompletePlaylist, History, Playlist} from 'src/@types/audio';
 import catchAsyncError from 'src/api/catchError';
 import {getClient} from 'src/api/client';
 import {updateNotification} from 'src/store/notification';
 import {useQuery} from 'react-query';
 import {useDispatch} from 'react-redux';
+import {PublicProfile} from 'src/@types/user';
 
 const fetchLatest = async (): Promise<AudioData[]> => {
   const client = await getClient();
@@ -68,7 +69,7 @@ const fetchUploadsByProfile = async (): Promise<AudioData[]> => {
 export const useFetchUploadsByProfile = () => {
   const dispatch = useDispatch();
 
-  return useQuery(['upload-by-profile'], {
+  return useQuery(['uploads-by-profile'], {
     queryFn: () => fetchUploadsByProfile(),
     onError(err) {
       const messageError = catchAsyncError(err);
@@ -167,3 +168,117 @@ export const useFetchIsFavorite = (id: string) => {
     enabled: id ? true : false,
   });
 };
+
+const fetchPublicProfile = async (id: string): Promise<PublicProfile> => {
+  const client = await getClient();
+  const {data} = await client('/profile/info/' + id);
+  return data.profile;
+};
+
+export const useFetchPublicProfile = (id: string) => {
+  const dispatch = useDispatch();
+
+  return useQuery(['profile', id], {
+    queryFn: () => fetchPublicProfile(id),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+    enabled: id ? true : false,
+  });
+};
+
+const fetchPublicUploads = async (id: string): Promise<AudioData[]> => {
+  const client = await getClient();
+  const {data} = await client('/profile/uploads/' + id);
+  return data.audios;
+};
+
+export const useFetchPublicUploads = (id: string) => {
+  const dispatch = useDispatch();
+
+  return useQuery(['uploads', id], {
+    queryFn: () => fetchPublicUploads(id),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+    enabled: id ? true : false,
+  });
+};
+
+const fetchPublicPlaylist = async (id: string): Promise<Playlist[]> => {
+  const client = await getClient();
+  const {data} = await client('/profile/playlist/' + id);
+  return data.playlist;
+};
+
+export const useFetchPublicPlaylist = (id: string) => {
+  const dispatch = useDispatch();
+
+  return useQuery(['playlist', id], {
+    queryFn: () => fetchPublicPlaylist(id),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+    enabled: id ? true : false,
+  });
+};
+
+const fetchPlaylistAudios = async (id: string): Promise<CompletePlaylist> => {
+  const client = await getClient();
+  const {data} = await client('/profile/playlist-audios/' + id);
+  return data.list;
+};
+
+export const useFetchPlaylistAudios = (id: string) => {
+  const dispatch = useDispatch();
+
+  return useQuery(['playlist-audio', id], {
+    queryFn: () => fetchPlaylistAudios(id),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+    enabled: id ? true : false,
+  });
+};
+
+const fetchIsFollowing = async (id: string): Promise<boolean> => {
+  const client = await getClient();
+  const {data} = await client('/profile/is-following/' + id);
+  return data.status;
+};
+
+export const useFetchIsFollowing = (id: string) => {
+  const dispatch = useDispatch();
+
+  return useQuery(['is-following', id], {
+    queryFn: () => fetchIsFollowing(id),
+    onError(err) {
+      const messageError = catchAsyncError(err);
+      dispatch(updateNotification({message: messageError, type: 'error'}));
+    },
+    enabled: id ? true : false,
+  });
+};
+
+// const fetchUpdateAudio = async (id: string): Promise<boolean> => {
+//   const client = await getClient();
+//   const {data} = await client('/profile/is-following/' + id);
+//   return data.status;
+// };
+
+// export const useFetchUpdateAudio = (id: string) => {
+//   const dispatch = useDispatch();
+
+//   return useQuery(['is-following', id], {
+//     queryFn: () => fetchUpdateAudio(id),
+//     onError(err) {
+//       const messageError = catchAsyncError(err);
+//       dispatch(updateNotification({message: messageError, type: 'error'}));
+//     },
+//     enabled: id ? true : false,
+//   });
+// };

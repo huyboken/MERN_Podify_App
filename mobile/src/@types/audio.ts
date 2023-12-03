@@ -26,7 +26,14 @@ export type HistoryAudio = {
   title: string;
   date: string;
 };
+
 export interface History {
   date: string;
   audios: HistoryAudio[];
+}
+
+export interface CompletePlaylist {
+  id: string;
+  title: string;
+  audios: AudioData[];
 }

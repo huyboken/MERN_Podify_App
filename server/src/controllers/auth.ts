@@ -168,7 +168,7 @@ export const signIn: RequestHandler = async (req, res) => {
       name: user.name,
       email: user.email,
       verified: user.verified,
-      avatar: user.avatar,
+      avatar: user.avatar?.url,
       followers: user.followers.length,
       followings: user.followings.length,
     },

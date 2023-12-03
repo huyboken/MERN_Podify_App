@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {ProfileNavigatorParamsList} from 'src/@types/navigation';
+import {ProfileNavigatorParamList} from 'src/@types/navigation';
 import catchAsyncError from 'src/api/catchError';
 import {getClient} from 'src/api/client';
 import {getAuthState} from 'src/store/auth';
@@ -24,8 +24,7 @@ const ReVerificationLink: FC<Props> = ({
   userId,
 }) => {
   const dispatch = useDispatch();
-  const {navigate} =
-    useNavigation<NavigationProp<ProfileNavigatorParamsList>>();
+  const {navigate} = useNavigation<NavigationProp<ProfileNavigatorParamList>>();
   const {profile} = useSelector(getAuthState);
 
   const [countDown, setCountDown] = useState(time);

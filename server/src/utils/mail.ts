@@ -7,7 +7,6 @@ import {
 } from "./variables";
 import nodemailer from "nodemailer";
 import { generateTemplate } from "#/mail/template";
-import emailVerificationToken from "#/models/emailVerificationToken";
 
 export const generateMailTransporter = () => {
   const transport = nodemailer.createTransport({
@@ -49,12 +48,12 @@ export const sendVetificationMail = async (token: string, profile: Profile) => {
     attachments: [
       {
         filename: "logo.png",
-        path: path.join(__dirname, "../mail/logo.png"),
+        path: path.join(__dirname, "../mail/images/logo.png"),
         cid: "logo",
       },
       {
         filename: "welcome.png",
-        path: path.join(__dirname, "../mail/welcome.png"),
+        path: path.join(__dirname, "../mail/images/welcome.png"),
         cid: "welcome",
       },
     ],
@@ -89,12 +88,12 @@ export const sendForgetPasswordLink = async (options: Options) => {
     attachments: [
       {
         filename: "logo.png",
-        path: path.join(__dirname, "../mail/logo.png"),
+        path: path.join(__dirname, "../mail/images/logo.png"),
         cid: "logo",
       },
       {
         filename: "forget_password.png",
-        path: path.join(__dirname, "../mail/forget_password.png"),
+        path: path.join(__dirname, "../mail/images/forget_password.png"),
         cid: "forget_password",
       },
     ],
@@ -124,12 +123,12 @@ export const sendPassResetSuccessEmail = async (
     attachments: [
       {
         filename: "logo.png",
-        path: path.join(__dirname, "../mail/logo.png"),
+        path: path.join(__dirname, "../mail/images/logo.png"),
         cid: "logo",
       },
       {
         filename: "forget_password.png",
-        path: path.join(__dirname, "../mail/forget_password.png"),
+        path: path.join(__dirname, "../mail/images/forget_password.png"),
         cid: "forget_password",
       },
     ],
